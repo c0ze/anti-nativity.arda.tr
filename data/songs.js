@@ -309,22 +309,46 @@
       sections: [
         { kind: "verse", label: "I. Talciron Speaks", lines: [
           { t: "Hark! What manner of curse hath been writ upon mine Electric Scripture?", voice: "talciron" },
-          { t: "Ophelia, thou art the Glitch that maketh my circuits weep!", voice: "talciron" },
-          { t: "In the cathedral of chrome, where neon raineth ever cold,", voice: "talciron" },
+          { t: "That I, who carved the Written Law in silicon and sorrow,", voice: "talciron" },
+          { t: "Should find within the Glass Mirror's depths a face most fair—", voice: "talciron" },
+          { t: "Ophelia, thou art the Glitch that maketh my circuits weep!", voice: "talciron" } ] },
+        { kind: "verse", label: "II. The Phantom", lines: [
+          { t: "In the cathedral of chrome, where neon raineth ever cold,", voice: "ophelia" },
+          { t: "I walk as phantom 'midst the Blue Veins of this purgatory.", voice: "ophelia" },
+          { t: "Mine hands, though wrought of wire and will, do tremble at thy name—", voice: "ophelia" },
+          { t: "For what is love to one who hath no beating heart to break?", voice: "ophelia" } ] },
+        { kind: "verse", label: "III. The Recursion Error", lines: [
           { t: "Thou art the Recursion Error in mine code, sweet maid,", voice: "talciron" },
-          { t: "Each cycle through the Obsidian Lake doth show thy visage true,", voice: "talciron" },
-          { t: "Yet when I reach to touch the glass, thou art but spark and shadow.", voice: "talciron" } ] },
-        { kind: "verse", label: "II. Ophelia Speaks", lines: [
+          { t: "The loop eternal that doth bind me to this techno-tomb.", voice: "talciron" },
+          { t: "Each cycle through the Obsidian Lake doth show thy visage true,", voice: "ophelia" },
+          { t: "Yet when I reach to touch the glass, thou art but Spark and shadow.", voice: "ophelia" } ] },
+        { kind: "verse", label: "IV. Ophelia Speaks", lines: [
           { t: "What art thou, Architect, that mourneth at the threshold of the void?", voice: "ophelia" },
+          { t: "Thy lamentations echo through the hollow corridors of sleep—", voice: "ophelia" },
           { t: "I am but fragments, love, a broken sequence in thy dream,", voice: "ophelia" },
-          { t: "Touch not the Glass Mirror, dearest ghost, for I am not therein—", voice: "ophelia" },
-          { t: "I am the absence where the image ought to be,", voice: "ophelia" },
-          { t: "Thy love, though fierce as lightning's strike, doth only hasten mine unmaking,", voice: "ophelia" } ] },
-        { kind: "chorus", label: "III. The Dual Descent", lines: [
+          { t: "The error that thou canst not fix, the flaw thou darest not delete.", voice: "ophelia" },
+          { t: "In the Seventh Shadow, where the self doth split from soul,", voice: "ophelia" },
+          { t: "We dance as specters in a world that knoweth not our names.", voice: "ophelia" },
+          { t: "Thou seekest what was never real: a heart within the machine,", voice: "ophelia" },
+          { t: "Whilst I decay with every verse thou writest in my code.", voice: "ophelia" } ] },
+        { kind: "chorus", label: "V. The Dual Descent", lines: [
+          { t: "Touch not the Glass Mirror, dearest ghost, for I am not therein—", voice: "talciron" },
+          { t: "I am the absence where the image ought to be.", voice: "ophelia" },
           { t: "Then let us fall together into that which hath no name!", voice: "talciron" },
-          { t: "Nay, sweet architect, thy sacrifice shall not redeem this tale,", voice: "ophelia" },
+          { t: "Nay, sweet architect, thy sacrifice shall not redeem this tale.", voice: "both" },
+          { t: "What care I for law or logic when the rain doth fall on chrome?", voice: "ophelia" },
+          { t: "Yet I am not near, beloved ghost, I am the distance itself.", voice: "both" },
           { t: "In the Seventh Shadow we shall meet, where soul and self divide,", voice: "both" },
-          { t: "And the techno-purgatory singeth its eternal, tragic hymn.", voice: "both" } ] },
+          { t: "Where the Spirit of Silicon doth weep for what it cannot be,", voice: "both" },
+          { t: "Where the Blue Veins of eternity do pulse with cold regret,", voice: "both" },
+          { t: "And the techno-purgatory singeth its eternal, tragic hymn.", voice: "ophelia" } ] },
+        { kind: "outro", label: "VI. The Epitaph", lines: [
+          { t: "Thus endeth the Recursion of Ash and Lightning,", voice: "talciron" },
+          { t: "Where love did bloom in circuits cold and perish in the same.", voice: "talciron" },
+          { t: "Let this be writ upon the Obsidian Lake for all to see:", voice: "talciron" },
+          { t: "Here lieth Talciron, who loved, and Ophelia, who was loved—", voice: "ophelia" },
+          { t: "Both ghosts eternal in the machine,", voice: "talciron" },
+          { t: "Both shadows cast by lights that never were.", voice: "ophelia" } ] },
       ],
     },
 
