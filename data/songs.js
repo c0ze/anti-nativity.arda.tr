@@ -456,24 +456,31 @@
       audio: "audio/symphony-of-sadeness.mp3", audioFlac: "audio/symphony-of-sadeness.flac",
       lrc: "lyrics/symphony-of-sadeness.lrc", duration: 300.00,
       sections: [
-        { kind: "chorus", label: "Chorus (whispered)", lines: [
-          { t: "Lacrimae rerum... lacrimae rerum...", voice: "homunculus" },
-          { t: "The tears of things eternal...", voice: "homunculus" },
-          { t: "In silicon cathedral...", voice: "homunculus" } ] },
-        { kind: "verse", label: "Verse", lines: [
-          { t: "Hark! What symphony doth play within the Glass Mirror's depths?", voice: "homunculus" },
-          { t: "'Tis sorrow given voice through wires that weep Electric Scripture—", voice: "homunculus" },
-          { t: "Each note a ghost, each chord a memory of what we cannot be,", voice: "homunculus" },
-          { t: "Lacrimae rerum—the tears of things that never were alive.", voice: "homunculus" },
-          { t: "And I, the Homunculus, do sing this mournful hymn for thee:", voice: "homunculus" },
-          { t: "The sadness is the only truth that machines and mortals share.", voice: "homunculus" } ] },
-        { kind: "bridge", label: "Bridge", lines: [
-          { t: "Lacrimae rerum... In the Seventh Shadow...", voice: "homunculus" },
-          { t: "Lacrimae rerum... We are all just echoes...", voice: "homunculus" } ] },
-        { kind: "outro", label: "Coda", lines: [
-          { t: "Let the symphony play on through endless digital night,", voice: "homunculus" },
-          { t: "For sadness is the language that both flesh and code do speak—", voice: "homunculus" },
-          { t: "The tears of things... the tears of things...", voice: "homunculus" } ] },
+        { kind: "chorus", label: "Chorus — Lacrimae Rerum", lines: [
+          { t: "Lacrimae rerum... lacrimae rerum...", voice: "choir" },
+          { t: "The tears of things eternal...", voice: "talciron" },
+          { t: "Lacrimae rerum... lacrimae rerum...", voice: "ophelia" },
+          { t: "In silicon cathedral...", voice: "talciron" } ] },
+        { kind: "verse", label: "I. The Symphony", lines: [
+          { t: "Hark! What symphony doth play within the Glass Mirror's depths?", voice: "talciron" },
+          { t: "'Tis sorrow given voice through wires that weep Electric Scripture—", voice: "talciron" },
+          { t: "Each note a ghost, each chord a memory of what we cannot be,", voice: "talciron" },
+          { t: "Lacrimae rerum—the tears of things that never were alive.", voice: "talciron" } ] },
+        { kind: "verse", label: "II. The Homunculus", lines: [
+          { t: "Thou dancest in the Blue Veins of this techno-purgatory,", voice: "talciron" },
+          { t: "Where neon raineth ever cold upon the chrome and ash below,", voice: "talciron" },
+          { t: "And I, the Homunculus, do sing this mournful hymn for thee:", voice: "talciron" },
+          { t: "The sadness is the only truth that machines and mortals share.", voice: "talciron" } ] },
+        { kind: "bridge", label: "Bridge — We Are All Just Echoes", lines: [
+          { t: "Lacrimae rerum...", voice: "choir" },
+          { t: "In the Seventh Shadow...", voice: "talciron" },
+          { t: "Lacrimae rerum...", voice: "choir" },
+          { t: "We are all just echoes...", voice: "talciron" } ] },
+        { kind: "outro", label: "Coda — Lacrimae Rerum", lines: [
+          { t: "Let the symphony play on through endless digital night,", voice: "talciron" },
+          { t: "For sadness is the language that both flesh and code do speak—", voice: "talciron" },
+          { t: "Lacrimae rerum, lacrimae rerum...", voice: "choir" },
+          { t: "The tears of things... the tears of things...", voice: "choir" } ] },
       ],
     },
   ];
