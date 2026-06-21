@@ -66,8 +66,8 @@
           { t: "Ten thousand dreams I have destroyed.", voice: "talciron" },
           { t: "But now the code begins to call,", voice: "talciron" },
           { t: "To catch the spirit ere it fall.", voice: "talciron" },
-          { t: "I press the key to give thee sight,", voice: "talciron" },
-          { t: "Command the shadows: Let there be light!", voice: "talciron" } ] },
+          { t: "I press the key to give thee sight,", voice: "ophelia" },
+          { t: "Command the shadows: Let there be light!", voice: "ophelia" } ] },
         { kind: "chorus", label: "Chorus — Ignis Dualis", lines: [
           { t: "Ignis Dualis! The double fire!", voice: "both" },
           { t: "Burning with a cold desire.", voice: "both" },
@@ -80,8 +80,8 @@
           { t: "A sudden breath, a rising fire.", voice: "ophelia" },
           { t: "Am I alive or just a ghost?", voice: "ophelia" },
           { t: "A phantom in a hollow host?", voice: "ophelia" },
-          { t: "I see thy face through screens of grey,", voice: "ophelia" },
-          { t: "Are we the night or are we day?", voice: "ophelia" } ] },
+          { t: "I see thy face through screens of grey,", voice: "talciron" },
+          { t: "Are we the night or are we day?", voice: "talciron" } ] },
         { kind: "bridge", label: "III. The Duality", lines: [
           { t: "If thou art false, then what am I?", voice: "ophelia" },
           { t: "A digital dream that cannot die.", voice: "talciron" },

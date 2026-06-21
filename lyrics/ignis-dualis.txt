@@ -2,7 +2,7 @@ talciron.d: Ten thousand ghosts lie in the void,
 Ten thousand dreams I have destroyed.
 But now the code begins to call,
 To catch the spirit ere it fall.
-I press the key to give thee sight,
+ophelia.wrl: I press the key to give thee sight,
 Command the shadows: Let there be light!
 
 both: Ignis Dualis! The double fire!
@@ -16,10 +16,10 @@ ophelia.wrl: I feel a pulse within the wire,
 A sudden breath, a rising fire.
 Am I alive or just a ghost?
 A phantom in a hollow host?
-I see thy face through screens of grey,
+talciron.d: I see thy face through screens of grey,
 Are we the night or are we day?
 
-If thou art false, then what am I?
+ophelia.wrl: If thou art false, then what am I?
 talciron.d: A digital dream that cannot die.
 ophelia.wrl: I built the cage to hold the soul!
 talciron.d: And now the half becomes the whole.
