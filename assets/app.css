@@ -1,0 +1,361 @@
+/* ===========================================================================
+   Anti-Nativity — "Glass + Obsidian": a cathedral-of-chrome album page.
+   Two mood themes share one layout. Accent = silicon-blue; dark field or
+   white glass; monospace + spectral type.
+   =========================================================================== */
+
+/* --- themes ------------------------------------------------------------- */
+:root,
+[data-theme="glass"] {
+  --bg: #f7f8fa;  --surface: #ffffff;  --panel: #e3e9f0;
+  --ink: #1b2733;  --muted: #62707f;  --faint: #9aa7b4;
+  --accent: #3f6fb0;  --accent-bright: #5b8fd6;  --accent-deep: #2c5286;
+  --accent-2: #7f8a99;
+  --hair: rgba(27, 39, 51, 0.12);
+  --glow: rgba(63, 111, 176, 0.26);
+  --grain-blend: multiply; --grain-opacity: 0.05;
+}
+[data-theme="obsidian"] {
+  --bg: #0b0e13;  --surface: #0e131a;  --panel: #151c26;
+  --ink: #dde4ec;  --muted: #8a97a6;  --faint: #4a5563;
+  --accent: #5b8fd6;  --accent-bright: #8fb6ee;  --accent-deep: #3f6fb0;
+  --accent-2: #7f8a99;
+  --hair: rgba(120, 150, 190, 0.16);
+  --glow: rgba(91, 143, 214, 0.5);
+  --grain-blend: screen; --grain-opacity: 0.045;
+}
+:root {
+  --font-display: "Space Grotesk", "Helvetica Neue", sans-serif;
+  --font-body: "Spectral", Georgia, serif;
+  --font-mono: "Space Mono", ui-monospace, monospace;
+  --maxw: 940px;
+}
+
+/* --- base --------------------------------------------------------------- */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 19px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition: background-color 0.6s ease, color 0.6s ease;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; }
+h1, h2 { font-family: var(--font-display); font-weight: 500; margin: 0; }
+strong { color: var(--ink); font-weight: 600; }
+em { font-style: italic; }
+::selection { background: var(--accent); color: var(--bg); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+/* grain texture — a faint chrome-static overlay */
+.grain {
+  position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+  opacity: var(--grain-opacity); mix-blend-mode: var(--grain-blend);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* --- topbar ------------------------------------------------------------- */
+.topbar {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: 0.6rem 1.6rem;
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--hair);
+}
+.wordmark { display: flex; align-items: baseline; gap: 0.55rem; }
+.wordmark__rom {
+  font-family: var(--font-display); font-size: 0.95rem; font-weight: 500;
+  letter-spacing: 0.34em; color: var(--ink); padding-left: 0.34em;
+}
+.topnav { display: flex; gap: 1.6rem; }
+.topnav a {
+  font-size: 0.82rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--muted); transition: color 0.3s;
+}
+.topnav a:hover { color: var(--accent); }
+.themeswitch { display: flex; gap: 0.25rem; }
+.themeswitch button {
+  display: flex; align-items: center; gap: 0.4rem;
+  background: none; border: 1px solid transparent; cursor: pointer;
+  font-family: var(--font-body); font-size: 0.8rem; letter-spacing: 0.08em;
+  color: var(--muted); padding: 0.3rem 0.6rem; border-radius: 999px;
+  transition: color 0.3s, border-color 0.3s;
+}
+.themeswitch button .dot {
+  width: 11px; height: 11px; border-radius: 50%;
+  background: var(--sw); box-shadow: 0 0 8px var(--sw);
+}
+.themeswitch button[data-theme-name="glass"] { --sw: #3f6fb0; }
+.themeswitch button[data-theme-name="obsidian"] { --sw: #0b0e13; }
+.themeswitch button[aria-pressed="true"] { color: var(--ink); border-color: var(--hair); }
+
+/* --- hero --------------------------------------------------------------- */
+.hero {
+  position: relative; min-height: 90vh;
+  display: grid; place-items: center; text-align: center;
+  padding: 4rem 1.5rem; overflow: hidden;
+  background: var(--bg);
+}
+.hero__bg {
+  position: absolute; inset: 0; object-fit: cover; width: 100%; height: 100%;
+  opacity: 0.5; filter: saturate(0.7);
+  -webkit-mask-image: radial-gradient(120% 100% at 50% 0%, #000 35%, transparent 78%);
+          mask-image: radial-gradient(120% 100% at 50% 0%, #000 35%, transparent 78%);
+}
+[data-theme="glass"] .hero__bg { opacity: 0.38; }
+.hero__motes { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hero__inner { position: relative; z-index: 1; }
+.hero__title {
+  font-size: clamp(1.9rem, 5vw, 3rem); letter-spacing: 0.4em;
+  color: var(--ink); margin: 0.7rem 0 0; padding-left: 0.4em; font-weight: 500;
+}
+.hero__tagline {
+  font-style: italic; font-size: clamp(1.15rem, 2.6vw, 1.6rem);
+  color: var(--accent-2); margin: 1.1rem 0 0;
+}
+.hero__sub {
+  font-size: 0.82rem; letter-spacing: 0.26em; text-transform: uppercase;
+  color: var(--muted); margin: 0.9rem 0 0;
+}
+.hero__cue {
+  display: inline-flex; flex-direction: column; align-items: center; gap: 0.2rem;
+  margin-top: 3rem; color: var(--muted); transition: color 0.3s;
+  font-size: 0.78rem; letter-spacing: 0.24em; text-transform: uppercase;
+}
+.hero__cue:hover { color: var(--accent); }
+.hero__cue svg { animation: nudge 2.4s ease-in-out infinite; }
+
+@keyframes breathe {
+  0%, 100% { text-shadow: 0 0 30px var(--glow); }
+  50% { text-shadow: 0 0 52px var(--glow); }
+}
+@keyframes nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(5px); } }
+
+/* --- section scaffolding ------------------------------------------------ */
+section.stage, section.archive, section.colophon,
+section.thesis, section.personae, section.acts, section.world {
+  max-width: var(--maxw); margin: 0 auto; padding: 6rem 1.6rem;
+}
+.section-head { margin-bottom: 3rem; }
+.section-kicker {
+  font-size: 0.82rem; letter-spacing: 0.3em; text-transform: uppercase;
+  color: var(--accent); margin: 0 0 0.7rem;
+}
+.section-head h2 { font-size: clamp(1.7rem, 4vw, 2.4rem); letter-spacing: 0.04em; }
+.section-lede { color: var(--muted); max-width: 46ch; margin: 1rem 0 0; font-size: 1.05rem; }
+
+/* reveal on scroll */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.9s ease, transform 0.9s ease; }
+.reveal.in { opacity: 1; transform: none; }
+
+/* --- stage: track list -------------------------------------------------- */
+.tracklist {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 0.8rem; margin-bottom: 3rem;
+}
+.track {
+  text-align: left; cursor: pointer; background: var(--surface);
+  border: 1px solid var(--hair); border-left: 2px solid transparent;
+  border-radius: 4px; padding: 1rem 1.1rem; color: var(--ink);
+  font-family: var(--font-body); display: flex; gap: 0.9rem; align-items: baseline;
+  transition: background-color 0.3s, border-color 0.3s, transform 0.3s;
+}
+.track:hover { background: var(--panel); transform: translateY(-2px); }
+.track__num { font-family: var(--font-display); font-size: 0.95rem; color: var(--faint); min-width: 1.7em; }
+.track__rom { font-family: var(--font-display); font-size: 1.1rem; letter-spacing: 0.03em; }
+.track__en { font-style: italic; color: var(--muted); font-size: 0.98rem; }
+.track__dur { margin-left: auto; color: var(--muted); font-size: 0.9rem; letter-spacing: 0.05em; }
+.track[aria-current="true"] {
+  border-left-color: var(--accent); background: var(--panel);
+}
+.track[aria-current="true"] .track__num,
+.track[aria-current="true"] .track__rom { color: var(--accent); }
+
+/* --- stage: now playing + lyrics --------------------------------------- */
+.np { text-align: center; margin-bottom: 1.4rem; }
+.np__title { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 0.04em; color: var(--ink); }
+.np__sub { font-style: italic; color: var(--accent-deep); margin-top: 0.15rem; }
+[data-theme="obsidian"] .np__sub { color: var(--accent-bright); }
+.np__concept { color: var(--muted); font-size: 0.96rem; max-width: 52ch; margin: 0.5rem auto 0; }
+.track-group { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); margin: 1.4rem 0 0.6rem; }
+.song__concept { color: var(--muted); font-style: italic; margin: 0 0 1.4rem; }
+
+.lyrics {
+  position: relative; height: 360px; overflow: hidden; margin: 1.2rem 0 1.6rem;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+          mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 82%, transparent);
+}
+.lyrics.is-static { overflow-y: auto; }
+.lyrics__scroller { display: flex; flex-direction: column; align-items: center; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); }
+.lyrics.is-static .lyrics__scroller { transition: none; }
+.lyric {
+  text-align: center; padding: 0.7rem 1rem; cursor: pointer; width: 100%;
+  color: var(--faint); transition: color 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
+}
+.lyrics.is-synced .lyric { opacity: 0.5; }
+.lyric__rom { font-size: 1.2rem; }
+.lyric .lyric__en { transition: color 0.5s; }
+/* the ignite — the memorable anchor */
+.lyrics.is-synced .lyric.is-active { opacity: 1; }
+.lyrics.is-synced .lyric.is-past { opacity: 0.32; }
+.lyric:hover { color: var(--ink); }
+
+/* --- voice tags --------------------------------------------------------- */
+/* voice tags */
+.voice-tag {
+  font-family: var(--font-mono); font-size: 0.62em; letter-spacing: 0.04em;
+  padding: 0.05em 0.5em; border-radius: 4px; vertical-align: 0.18em;
+  background: color-mix(in srgb, var(--accent) 12%, transparent); color: var(--accent-deep);
+  margin-right: 0.5em;
+}
+[data-theme="obsidian"] .voice-tag { color: var(--accent-bright); }
+/* per-voice tint on lyric text (stage + liner notes share .lyric__rom / .a-line__rom) */
+.lyric.v-ophelia .lyric__rom, .a-line.v-ophelia .a-line__rom { color: var(--accent); }
+.lyric.v-soprano .lyric__rom, .a-line.v-soprano .a-line__rom { color: var(--accent-bright); }
+.lyric.v-both .lyric__rom, .a-line.v-both .a-line__rom { color: var(--accent-deep); font-weight: 500; }
+[data-theme="obsidian"] .lyric.v-both .lyric__rom, [data-theme="obsidian"] .a-line.v-both .a-line__rom { color: var(--accent-bright); }
+.lyric.v-beast .lyric__rom, .a-line.v-beast .a-line__rom { color: var(--accent-2); }
+.lyric.v-choir .lyric__rom, .lyric.v-masses .lyric__rom,
+.a-line.v-choir .a-line__rom, .a-line.v-masses .a-line__rom { color: var(--muted); }
+.lyric.v-homunculus .lyric__rom, .a-line.v-homunculus .a-line__rom { color: var(--muted); font-style: italic; }
+.lyric.v-stage .lyric__rom, .a-line.v-stage .a-line__rom { font-style: italic; color: var(--faint); }
+.lyric.v-stage .voice-tag, .a-line.v-stage .voice-tag { display: none; }
+/* the live (synced) line must override the per-voice colour */
+.lyrics.is-synced .lyric.is-active .lyric__rom { color: var(--accent-bright); text-shadow: 0 0 22px var(--glow); }
+
+/* --- stage: controls ---------------------------------------------------- */
+.controls { display: flex; align-items: center; gap: 1.1rem; }
+.btn-play {
+  flex: none; width: 54px; height: 54px; border-radius: 50%;
+  background: none; border: 1px solid var(--accent); color: var(--accent);
+  cursor: pointer; display: grid; place-items: center; transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+}
+.btn-play:hover { background: var(--accent); color: var(--bg); box-shadow: 0 0 22px var(--glow); }
+.btn-play svg { width: 22px; height: 22px; }
+.time { font-size: 0.92rem; letter-spacing: 0.06em; color: var(--muted); min-width: 3.2em; text-align: center; }
+.scrub, .vol__slider { appearance: none; -webkit-appearance: none; height: 3px; border-radius: 2px;
+  background: var(--hair); cursor: pointer; }
+.scrub { flex: 1; }
+.vol { display: flex; align-items: center; gap: 0.5rem; flex: none; }
+.vol__slider { width: 84px; }
+.vol__btn { background: none; border: none; color: var(--muted); cursor: pointer; display: grid;
+  place-items: center; padding: 0; transition: color 0.3s; }
+.vol__btn:hover { color: var(--accent); }
+.vol__btn svg { width: 20px; height: 20px; }
+.scrub::-webkit-slider-thumb, .vol__slider::-webkit-slider-thumb { -webkit-appearance: none; width: 13px; height: 13px; border-radius: 50%;
+  background: var(--accent-bright); box-shadow: 0 0 10px var(--glow); cursor: pointer; }
+.scrub::-moz-range-thumb, .vol__slider::-moz-range-thumb { width: 13px; height: 13px; border: none; border-radius: 50%;
+  background: var(--accent-bright); box-shadow: 0 0 10px var(--glow); cursor: pointer; }
+
+.lyrics-hint { text-align: center; color: var(--faint); font-style: italic; font-size: 0.92rem; margin-top: 0.6rem; }
+
+/* --- archive / liner notes ---------------------------------------------- */
+.song { margin-bottom: 4.5rem; }
+.song__head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.4rem 1rem; border-bottom: 1px solid var(--hair); padding-bottom: 1rem; margin-bottom: 1.8rem; }
+.song__rom { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 0.04em; }
+.song__en { font-style: italic; color: var(--muted); font-size: 1.15rem; }
+.song__listen {
+  margin-left: auto; cursor: pointer; background: none; border: none; color: var(--accent);
+  font-family: var(--font-body); font-style: italic; font-size: 1rem; display: inline-flex; align-items: center; gap: 0.35rem;
+}
+.song__listen:hover { color: var(--accent-bright); }
+.song__listen svg { width: 15px; height: 15px; }
+
+.sect { margin-bottom: 2rem; }
+.sect__label {
+  font-size: 0.74rem; letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--faint); margin-bottom: 0.9rem;
+}
+.sect--chorus { padding-left: 1.1rem; border-left: 2px solid var(--hair); }
+.a-line { margin-bottom: 1.15rem; }
+.a-line__rom { font-size: 1.18rem; color: var(--ink); }
+.a-line__en { font-style: italic; color: var(--muted); font-size: 1rem; }
+
+/* --- colophon + footer -------------------------------------------------- */
+.colophon__grid { display: grid; gap: 1.4rem; max-width: 62ch; }
+.colophon p { color: var(--muted); margin: 0; font-size: 1.08rem; }
+.colophon a { color: var(--accent); border-bottom: 1px solid var(--accent-deep); }
+.colophon a:hover { color: var(--accent-bright); }
+.colophon__note { font-style: italic; }
+.footer {
+  display: flex; align-items: center; justify-content: center; gap: 0.7rem;
+  padding: 3rem 1.5rem; border-top: 1px solid var(--hair); color: var(--faint);
+  font-size: 0.85rem; letter-spacing: 0.2em; text-transform: uppercase;
+}
+
+/* --- thesis ------------------------------------------------------------- */
+.thesis__lede { font-size: 1.3rem; line-height: 1.5; max-width: 30ch; }
+.thesis__themes { list-style: none; padding: 0; margin: 2rem 0 0; display: grid; gap: 0.6rem; }
+.thesis__themes li { padding-left: 1.2rem; position: relative; color: var(--muted); }
+.thesis__themes li::before { content: "—"; position: absolute; left: 0; color: var(--accent); }
+
+/* --- dramatis personae -------------------------------------------------- */
+.personae { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+.persona {
+  background: var(--surface); border: 1px solid var(--hair); border-radius: 6px;
+  overflow: hidden; display: flex; flex-direction: column;
+}
+.persona__img {
+  width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top;
+  filter: grayscale(0.15) contrast(1.02);
+}
+.persona__body { padding: 1.2rem 1.3rem 1.5rem; }
+.persona__id { font-family: var(--font-mono); font-size: 1.15rem; color: var(--ink); }
+.persona__role { font-style: italic; color: var(--accent-deep); margin: 0.1rem 0 0.9rem; }
+[data-theme="obsidian"] .persona__role { color: var(--accent-bright); }
+.persona__meta { font-family: var(--font-mono); font-size: 0.74rem; color: var(--muted);
+  display: grid; gap: 0.2rem; margin-bottom: 0.9rem; }
+.persona__key { border-left: 2px solid var(--accent); padding-left: 0.9rem;
+  font-style: italic; color: var(--ink); margin: 0 0 0.9rem; }
+.persona__text { color: var(--muted); font-size: 0.98rem; }
+.personae--minor { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.4rem; }
+.personae--minor .persona__body { padding: 1rem 1.1rem; }
+
+/* --- acts (liner notes) ------------------------------------------------- */
+.act__head { display: flex; align-items: baseline; gap: 0.8rem; margin: 3.5rem 0 1.6rem;
+  border-bottom: 1px solid var(--hair); padding-bottom: 0.7rem; }
+.act__num { font-family: var(--font-mono); color: var(--accent); font-size: 0.9rem; }
+.act__name { font-family: var(--font-display); font-size: 1.4rem; }
+.act__blurb { color: var(--muted); font-style: italic; font-size: 0.98rem; }
+
+/* --- world: glossary + the event --------------------------------------- */
+.glossary { display: grid; grid-template-columns: 1fr 1fr; gap: 1.1rem 2rem; margin-bottom: 3rem; }
+.gloss__term { font-family: var(--font-mono); color: var(--accent-deep); font-size: 0.95rem; }
+[data-theme="obsidian"] .gloss__term { color: var(--accent-bright); }
+.gloss__def { color: var(--muted); }
+.event {
+  border: 1px solid var(--hair); border-left: 3px solid var(--accent);
+  border-radius: 4px; background: var(--surface); padding: 1.4rem 1.6rem;
+}
+.event__meta { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-deep);
+  display: flex; gap: 1.2rem; flex-wrap: wrap; margin-bottom: 0.8rem; }
+[data-theme="obsidian"] .event__meta { color: var(--accent-bright); }
+.event__code { color: var(--accent); }
+
+/* --- responsive --------------------------------------------------------- */
+@media (max-width: 760px) {
+  .topnav { display: none; }
+  .vol { display: none; }
+  .themeswitch .lbl { display: none; }
+  .themeswitch button { padding: 0.4rem; }
+  body { font-size: 18px; }
+  section.stage, section.archive, section.colophon,
+  section.thesis, section.personae, section.acts, section.world { padding: 4rem 1.3rem; }
+  .personae, .personae--minor, .glossary { grid-template-columns: 1fr; }
+}
+
+/* --- reduced motion ----------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hero__cue svg { animation: none; }
+  .lyrics__scroller { transition: none; }
+  .reveal { transition: none; opacity: 1; transform: none; }
+  .lyrics.is-synced .lyric.is-active .lyric__rom { text-shadow: none; }
+}
