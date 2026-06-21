@@ -453,7 +453,7 @@
       title: "Symphony of Sadeness", subtitle: "Lacrimae Rerum",
       concept: "A side ritual: sorrow as the only truth machines and mortals share — the tears of things that never were alive.",
       primaryVoice: "homunculus",
-      audio: "audio/symphony-of-sadeness.mp3", audioFlac: "audio/symphony-of-sadeness.flac",
+      audio: "audio/symphony-of-sadeness.mp3?v=2", audioFlac: "audio/symphony-of-sadeness.flac?v=2",
       lrc: "lyrics/symphony-of-sadeness.lrc", duration: 300.00,
       sections: [
         { kind: "chorus", label: "Chorus — Lacrimae Rerum", lines: [

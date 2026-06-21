@@ -21,11 +21,21 @@ LANDR-10 Symphony of Sadeness-Warm-Medium=symphony-of-sadeness
 EOF
 }
 
+# Per-track audio filters. Symphony of Sadeness (the album closer) hard-cuts at
+# ~298.3s; fade its last 8s so it does not end abruptly. (Word-split into args.)
+filter_for() {
+  case "$1" in
+    symphony-of-sadeness) printf -- '-af afade=t=out:st=290.3:d=8' ;;
+    *) printf '' ;;
+  esac
+}
+
 map | while IFS='=' read -r base slug; do
   src="songs/${base}.wav"
   [ -f "$src" ] || { echo "  MISSING  $src"; continue; }
-  ffmpeg -nostdin -y -loglevel error -i "$src" -c:a flac -compression_level 8 "audio/${slug}.flac"
-  ffmpeg -nostdin -y -loglevel error -i "$src" -c:a libmp3lame -q:a 2 "audio/${slug}.mp3"
+  flt=$(filter_for "$slug")
+  ffmpeg -nostdin -y -loglevel error -i "$src" $flt -c:a flac -compression_level 8 "audio/${slug}.flac"
+  ffmpeg -nostdin -y -loglevel error -i "$src" $flt -c:a libmp3lame -q:a 2 "audio/${slug}.mp3"
   dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$src")
   printf '  ok  %-34s dur=%.2f\n' "$slug" "$dur"
 done
