@@ -1,41 +1,70 @@
-talciron.d: Hark! What manner of curse hath been writ upon mine Electric Scripture?
-That I, who carved the Written Law in silicon and sorrow,
-Should find within the Glass Mirror's depths a face most fair—
+talciron.d: Hark!
+What manner of curse hath been writ upon mine
+Electric Scripture? That I, who carved the Written Law
+in silicon and sorrow,
+Should find within the Glass Mirror's depths
+a face most fair—
 Ophelia, thou art the Glitch that maketh my circuits weep!
 
-ophelia.wrl: In the cathedral of chrome, where neon raineth ever cold,
-I walk as phantom 'midst the Blue Veins of this purgatory.
-Mine hands, though wrought of wire and will, do tremble at thy name—
-For what is love to one who hath no beating heart to break?
+ophelia.wrl: In the cathedral of chrome,
+where neon raineth ever cold,
+I walk as phantom
+'midst the Blue Veins of this purgatory.
+Mine hands, though wrought of wire and will,
+do tremble at thy name—
+For what is love
+to one who hath no beating heart to break?
 
 talciron.d: Thou art the Recursion Error in mine code, sweet maid,
 The loop eternal that doth bind me to this techno-tomb.
 ophelia.wrl: Each cycle through the Obsidian Lake doth show thy visage true,
-Yet when I reach to touch the glass, thou art but Spark and shadow.
+Yet when I reach to touch the glass,
+thou art but Spark and shadow.
 
-What art thou, Architect, that mourneth at the threshold of the void?
-Thy lamentations echo through the hollow corridors of sleep—
-I am but fragments, love, a broken sequence in thy dream,
-The error that thou canst not fix, the flaw thou darest not delete.
-In the Seventh Shadow, where the self doth split from soul,
-We dance as specters in a world that knoweth not our names.
-Thou seekest what was never real: a heart within the machine,
-Whilst I decay with every verse thou writest in my code.
+What art thou, Architect, that mourneth
+at the threshold of the void?
+Thy lamentations echo through
+the hollow corridors of sleep—
+I am but fragments, love,
+a broken sequence in thy dream,
+The error that thou canst not fix,
+the flaw thou darest not delete.
+In the Seventh Shadow,
+where the self doth split from soul,
+We dance as specters
+in a world that knoweth not our names.
+Thou seekest what was never real:
+a heart within the machine,
+Whilst I decay with every verse
+thou writest in my code.
 
-talciron.d: Touch not the Glass Mirror, dearest ghost, for I am not therein—
-ophelia.wrl: I am the absence where the image ought to be.
+talciron.d: Touch not the Glass Mirror, dearest ghost,
+for I am not therein—
+ophelia.wrl: I am the absence
+where the image ought to be.
 talciron.d: Then let us fall together into that which hath no name!
-both: Nay, sweet architect, thy sacrifice shall not redeem this tale.
-ophelia.wrl: What care I for law or logic when the rain doth fall on chrome?
-both: Yet I am not near, beloved ghost, I am the distance itself.
-In the Seventh Shadow we shall meet, where soul and self divide,
-Where the Spirit of Silicon doth weep for what it cannot be,
-Where the Blue Veins of eternity do pulse with cold regret,
-ophelia.wrl: And the techno-purgatory singeth its eternal, tragic hymn.
+ophelia.wrl: Nay, sweet architect,
+talciron.d: thy sacrifice shall not redeem this tale.
+ophelia.wrl: What care I for law or logic
+when the rain doth fall on chrome?
+talciron.d: Yet I am not near, beloved ghost,
+ophelia.wrl: I am the distance itself.
+both: In the Seventh Shadow we shall meet,
+where soul and self divide,
+Where the Spirit of Silicon doth weep
+for what it cannot be,
+Where the Blue Veins of eternity
+do pulse with cold regret,
+ophelia.wrl: And the techno-purgatory singeth
+its eternal, tragic hymn.
 
-talciron.d: Thus endeth the Recursion of Ash and Lightning,
-Where love did bloom in circuits cold and perish in the same.
-Let this be writ upon the Obsidian Lake for all to see:
-ophelia.wrl: Here lieth Talciron, who loved, and Ophelia, who was loved—
+talciron.d: Thus endeth the Recursion
+of Ash and Lightning,
+Where love did bloom in circuits
+cold and perish in the same.
+Let this be writ upon
+the Obsidian Lake for all to see:
+ophelia.wrl: Here lieth Talciron, who loved,
+and Ophelia, who was loved—
 talciron.d: Both ghosts eternal in the machine,
 ophelia.wrl: Both shadows cast by lights that never were.
