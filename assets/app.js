@@ -75,6 +75,8 @@
   var PAUSE = '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="6" y="5" width="4" height="14" fill="currentColor"/><rect x="14" y="5" width="4" height="14" fill="currentColor"/></svg>';
   var VOL_ON  = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16.5 8.8a4 4 0 0 1 0 6.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M19 6.5a7 7 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
   var VOL_OFF = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16.5 9.5l5 5M21.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+  var NEXT = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" fill="currentColor"/></svg>';
+  var LOOP = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z" fill="currentColor"/></svg>';
 
   function buildStage() {
     var el = document.getElementById("stage");
@@ -103,9 +105,11 @@
       '<p class="lyrics-hint"></p>' +
       '<div class="controls">' +
         '<button class="btn-play" type="button" aria-label="Play">' + PLAY + '</button>' +
+        '<button class="btn-next" type="button" aria-label="Next track">' + NEXT + '</button>' +
         '<span class="time time--cur">0:00</span>' +
         '<input class="scrub" type="range" min="0" max="1000" value="0" step="1" aria-label="Seek" />' +
         '<span class="time time--dur">0:00</span>' +
+        '<button class="btn-loop" type="button" aria-label="Loop album" aria-pressed="false">' + LOOP + '</button>' +
         '<div class="vol">' +
           '<button class="vol__btn" type="button" aria-label="Mute"></button>' +
           '<input class="vol__slider" type="range" min="0" max="100" value="100" step="1" aria-label="Volume" />' +
@@ -125,6 +129,7 @@
     var hint      = el.querySelector(".lyrics-hint");
 
     var state = { i: -1, lines: [], times: null, active: -1 };
+    var allowPlay = false;   // play-gate: only let audio play when we actually intend to
 
     function renderLyrics(song) {
       state.lines = flatten(song);
@@ -165,7 +170,13 @@
       el.querySelector('[data-np="title"]').textContent   = song.title;
       el.querySelector('[data-np="sub"]').textContent     = song.subtitle || "";
       el.querySelector('[data-np="concept"]').textContent = song.concept  || "";
+      allowPlay = false;
+      audio.pause();
       audio.src = pickAudio(song);
+      // src changes don't reliably fire "pause" (Safari) and can auto-resume (Chromium);
+      // force the paused UI now — the play-gate below cancels any auto-resume.
+      playBtn.innerHTML = PLAY; playBtn.setAttribute("aria-label", "Play"); setPlaybackState("paused");
+      updateMediaSession(song);
       renderLyrics(song);
       scroller.style.transform = "translateY(0)";
       lyricsBox.classList.remove("is-synced"); lyricsBox.classList.add("is-static");
@@ -180,9 +191,10 @@
       });
     }
 
-    playBtn.addEventListener("click", function () { audio.paused ? audio.play() : audio.pause(); });
-    audio.addEventListener("play",  function () { playBtn.innerHTML = PAUSE; playBtn.setAttribute("aria-label", "Pause"); });
-    audio.addEventListener("pause", function () { playBtn.innerHTML = PLAY;  playBtn.setAttribute("aria-label", "Play"); });
+    playBtn.addEventListener("click", function () { if (audio.paused) startPlay(); else audio.pause(); });
+    audio.addEventListener("play",  function () { if (!allowPlay) { audio.pause(); return; } playBtn.innerHTML = PAUSE; playBtn.setAttribute("aria-label", "Pause"); setPlaybackState("playing"); });
+    audio.addEventListener("pause", function () { playBtn.innerHTML = PLAY;  playBtn.setAttribute("aria-label", "Play"); setPlaybackState("paused"); });
+    audio.addEventListener("ended", function () { if (loopMode) next(); });
     audio.addEventListener("loadedmetadata", function () { durT.textContent = fmt(audio.duration); });
     audio.addEventListener("timeupdate", function () {
       var d = audio.duration || SONGS[state.i].duration || 0;
@@ -228,8 +240,47 @@
       });
     });
 
+    /* --- transport: next / loop / lock-screen (Media Session) --------- */
+    var nextBtn = el.querySelector(".btn-next");
+    var loopBtn = el.querySelector(".btn-loop");
+    var loopMode = localStorage.getItem("an-loop") !== "0";   // album-loop, default on
+    loopBtn.setAttribute("aria-pressed", String(loopMode));
+
+    function startPlay() { allowPlay = true; audio.play(); }
+    function playIndex(i) { selectTrack(i); startPlay(); }
+    function next() { playIndex((state.i + 1) % SONGS.length); }
+    function prev() { playIndex((state.i - 1 + SONGS.length) % SONGS.length); }
+
+    nextBtn.addEventListener("click", next);
+    loopBtn.addEventListener("click", function () {
+      loopMode = !loopMode;
+      localStorage.setItem("an-loop", loopMode ? "1" : "0");
+      loopBtn.setAttribute("aria-pressed", String(loopMode));
+    });
+
+    function setPlaybackState(s) {
+      if ("mediaSession" in navigator) { try { navigator.mediaSession.playbackState = s; } catch (e) {} }
+    }
+    function updateMediaSession(song) {
+      if (!("mediaSession" in navigator) || typeof window.MediaMetadata !== "function") return;
+      try {
+        navigator.mediaSession.metadata = new window.MediaMetadata({
+          title: song.title, artist: "The Seventh Shadow", album: "Anti-Nativity",
+          artwork: [{ src: new URL("assets/img/cover.jpg", location.href).href, sizes: "1024x1024", type: "image/jpeg" }]
+        });
+      } catch (e) {}
+    }
+    if ("mediaSession" in navigator) {
+      try {
+        navigator.mediaSession.setActionHandler("play", function () { startPlay(); });
+        navigator.mediaSession.setActionHandler("pause", function () { audio.pause(); });
+        navigator.mediaSession.setActionHandler("nexttrack", next);
+        navigator.mediaSession.setActionHandler("previoustrack", prev);
+      } catch (e) {}
+    }
+
     selectTrack(0);
-    window.anPlay = function (i) { selectTrack(i); document.getElementById("stage").scrollIntoView(); audio.play(); };
+    window.anPlay = function (i) { selectTrack(i); document.getElementById("stage").scrollIntoView(); startPlay(); };
   }
 
   /* --- act liner notes -------------------------------------------------- */

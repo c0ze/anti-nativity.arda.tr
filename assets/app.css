@@ -231,7 +231,7 @@ section.thesis, section.cast, section.acts, section.world {
 .lyrics.is-synced .lyric.is-active .lyric__rom { color: var(--accent-bright); text-shadow: 0 0 22px var(--glow); }
 
 /* --- stage: controls ---------------------------------------------------- */
-.controls { display: flex; align-items: center; gap: 1.1rem; }
+.controls { display: flex; align-items: center; gap: 1.1rem; flex-wrap: wrap; }
 .btn-play {
   flex: none; width: 54px; height: 54px; border-radius: 50%;
   background: none; border: 1px solid var(--accent); color: var(--accent);
@@ -242,13 +242,18 @@ section.thesis, section.cast, section.acts, section.world {
 .time { font-size: 0.92rem; letter-spacing: 0.06em; color: var(--muted); min-width: 3.2em; text-align: center; }
 .scrub, .vol__slider { appearance: none; -webkit-appearance: none; height: 3px; border-radius: 2px;
   background: var(--hair); cursor: pointer; }
-.scrub { flex: 1; }
+.scrub { flex: 1; min-width: 80px; }
 .vol { display: flex; align-items: center; gap: 0.5rem; flex: none; }
 .vol__slider { width: 84px; }
 .vol__btn { background: none; border: none; color: var(--muted); cursor: pointer; display: grid;
   place-items: center; padding: 0; transition: color 0.3s; }
 .vol__btn:hover { color: var(--accent); }
 .vol__btn svg { width: 20px; height: 20px; }
+.btn-next, .btn-loop { flex: none; background: none; border: none; color: var(--muted); cursor: pointer;
+  display: grid; place-items: center; padding: 0; transition: color 0.3s; }
+.btn-next:hover, .btn-loop:hover { color: var(--accent); }
+.btn-next svg, .btn-loop svg { width: 22px; height: 22px; }
+.btn-loop[aria-pressed="true"] { color: var(--accent); }
 .scrub::-webkit-slider-thumb, .vol__slider::-webkit-slider-thumb { -webkit-appearance: none; width: 13px; height: 13px; border-radius: 50%;
   background: var(--accent-bright); box-shadow: 0 0 10px var(--glow); cursor: pointer; }
 .scrub::-moz-range-thumb, .vol__slider::-moz-range-thumb { width: 13px; height: 13px; border: none; border-radius: 50%;
@@ -343,6 +348,9 @@ section.thesis, section.cast, section.acts, section.world {
 @media (max-width: 760px) {
   .topnav { display: none; }
   .vol { display: none; }
+  .controls { gap: 0.8rem; }
+  .btn-play { width: 46px; height: 46px; }
+  .time { min-width: 2.6em; font-size: 0.85rem; }
   .themeswitch .lbl { display: none; }
   .themeswitch button { padding: 0.4rem; }
   body { font-size: 18px; }
