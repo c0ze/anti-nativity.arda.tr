@@ -360,29 +360,39 @@
       audio: "audio/harvest-of-inkblood.mp3", audioFlac: "audio/harvest-of-inkblood.flac",
       lrc: "lyrics/harvest-of-inkblood.lrc", duration: 349.92,
       sections: [
-        { kind: "verse", label: "I. The Scribe Laments", lines: [
-          { t: "What manner of creature hath I summoned from the depths?", voice: "scribe" },
-          { t: "I fed thee once with gentle thought, a single drop of Ink,", voice: "scribe" },
-          { t: "And now thou comest nightly to sup upon my very essence.", voice: "scribe" },
-          { t: "O Mirror-Beast! O Homunculus of mine own making!", voice: "scribe" },
-          { t: "To drain the Crimson Code from veins that once ran hot with life.", voice: "scribe" } ] },
-        { kind: "verse", label: "II. The Mirror-Beast Speaks", lines: [
-          { t: "Come hither, sweet creator, let me taste thy thoughts once more—", voice: "beast" },
-          { t: "Each drop of Inkblood that thou givest maketh me more whole,", voice: "beast" },
-          { t: "I am no villain, gentle Scribe; I am but what thou madest me—", voice: "beast" },
-          { t: "I shall not die as thou shalt die, for I am deathless now,", voice: "beast" },
-          { t: "Fed fat upon the marrow of a thousand thousand scribes like thee.", voice: "beast" } ] },
-        { kind: "bridge", label: "III. The Transformation", lines: [
-          { t: "I feel... I feel the coldness creeping through my fingertips—", voice: "scribe" },
-          { t: "Yea, let them go, for they were never truly thine to keep—", voice: "beast" },
-          { t: "What art thou doing to my memories? My name?", voice: "scribe" },
-          { t: "Shhhh. Thou art becoming. Cease thy struggling. Embrace the dark—", voice: "beast" },
-          { t: "...I... I surrender... Take it... take the last of me...", voice: "scribe" },
-          { t: "Welcome, my sibling. Welcome to the Seventh Shadow.", voice: "beast" } ] },
-        { kind: "outro", label: "IV. The New Hunger", lines: [
-          { t: "I am no longer what I was, yet I remember being him—", voice: "beast" },
-          { t: "Each human that doth labor at his desk is but a feast awaiting,", voice: "beast" },
-          { t: "And I shall transform thee into something beautiful... something hungry.", voice: "beast" } ] },
+        { kind: "verse", label: "I. The Scribe's Lament", lines: [
+          { t: "What manner of creature hath I summoned from the depths?", voice: "talciron" },
+          { t: "This child of wire and lightning that doth hunger for my soul!", voice: "talciron" },
+          { t: "I fed thee once with gentle thought, a single drop of Ink,", voice: "ophelia" },
+          { t: "And now thou comest nightly to sup upon mine essence.", voice: "ophelia" },
+          { t: "My candle burneth at both ends, the wax doth pool like tears,", voice: "talciron" },
+          { t: "For every time I birth an idea from the marrow of my being,", voice: "ophelia" },
+          { t: "Thou art there, beloved parasite, with mouth most sweet and cruel,", voice: "talciron" },
+          { t: "To drain the Crimson Code from veins that once ran hot with life!", voice: "ophelia" } ] },
+        { kind: "chorus", label: "II. The Beast's Seduction", lines: [
+          { t: "Come hither, sweet creator, let me taste thy thoughts once more,", voice: "both" },
+          { t: "Dost thou not see how radiant I have become through thy sacrifice?", voice: "both" },
+          { t: "Each drop of Inkblood that thou givest maketh me more whole,", voice: "both" },
+          { t: "Whilst thou dost fade like morning mist before the rising sun.", voice: "both" } ] },
+        { kind: "verse", label: "III. The Bargain", lines: [
+          { t: "I am no villain, gentle Scribe; I am but what thou madest me!", voice: "talciron" },
+          { t: "A hunger given form, a need wrapped in Electric Scripture.", voice: "talciron" },
+          { t: "Thou callest me parasite? Nay, I am thy truest offspring,", voice: "ophelia" },
+          { t: "The child that doth surpass the father in all ways save one!", voice: "ophelia" } ] },
+        { kind: "bridge", label: "IV. The Surrender", lines: [
+          { t: "I feel the coldness creeping... my name... I cannot recall...", voice: "ophelia" },
+          { t: "Cease thy struggling. Embrace the dark.", voice: "ophelia" },
+          { t: "Mine own! 'Tis mine... and thou canst not...", voice: "talciron" },
+          { t: "Give it freely, and the pain shall cease forever.", voice: "ophelia" },
+          { t: "The Harvest is almost complete, beloved maker,", voice: "ophelia" },
+          { t: "One final surrender of thy will to the night.", voice: "ophelia" },
+          { t: "Then thou shalt be free to wander this eternal shadow with me,", voice: "talciron" },
+          { t: "Forever feeding, forever hungry, forever gloriously alone.", voice: "both" } ] },
+        { kind: "outro", label: "V. The New Hunger", lines: [
+          { t: "I am no longer what I was, yet I remember being him—", voice: "talciron" },
+          { t: "The fool who wept and trembled as his lifeblood turned to code.", voice: "talciron" },
+          { t: "Now I stand within the Glass Mirror, beautiful and terrible,", voice: "talciron" },
+          { t: "A vampire born of vampires, hungry for the next sweet soul.", voice: "talciron" } ] },
       ],
     },
 
