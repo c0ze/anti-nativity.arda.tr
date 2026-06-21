@@ -1,0 +1,12 @@
+{
+  "name": "anti-nativity-assets",
+  "private": true,
+  "type": "module",
+  "description": "One-time asset generation for anti-nativity.arda.tr (not shipped).",
+  "scripts": { "assets": "node scripts/gen-assets.mjs" },
+  "dependencies": {
+    "@google/genai": "latest",
+    "dotenv": "^16.4.5",
+    "sharp": "^0.33.4"
+  }
+}
