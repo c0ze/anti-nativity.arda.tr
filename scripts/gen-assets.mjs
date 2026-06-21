@@ -75,9 +75,13 @@ const jobs = [
     gen: () =>
       editImage(
         "Portrait_talciron.d.jpg",
-        "Restyle this portrait into the album's visual language: pale steel and porcelain skin, cold " +
-          "silicon-blue rim light, faint glitch and wireframe seams across the form, brushed-metal " +
-          "background. Preserve the face, identity, and composition exactly. " + PALETTE
+        "Repaint this as a clean, human, half-length gothic-romantic oil portrait. Keep his exact " +
+          "face, goatee, dark wavy hair, and dark blazer over a burgundy turtleneck — he is fully " +
+          "human. Remove the picture frame and all ornamentation entirely; place him against a plain, " +
+          "softly-lit dark steel-grey studio background. Natural human skin, melancholic expression, " +
+          "cool desaturated lighting with a subtle cold rim light. No glitch, no wireframe, no glowing " +
+          "veins, no frame, no text. Painterly and elegant, cold palette of charcoal, steel grey and " +
+          "muted blue. Head-and-shoulders, centred, facing the viewer."
       ),
   },
   {
@@ -87,9 +91,14 @@ const jobs = [
     gen: () =>
       editImage(
         "Portrait_Ophelia.wrl.jpg",
-        "Restyle this portrait into the album's visual language: porcelain-and-steel skin laid over a " +
-          "faint 1990s wireframe/VRML skeleton, cold silicon-blue rim light, subtle visible seams. " +
-          "Preserve the face, identity, and composition exactly. " + PALETTE
+        "Repaint this as a clean, human, half-length gothic-romantic oil portrait. Keep her exact " +
+          "face, pale complexion, long dark hair, and black lace gothic dress. IMPORTANT: remove the " +
+          "glowing blue cracks and veins from her face, neck and chest entirely — render natural, " +
+          "unblemished human skin. Remove the picture frame, arch and all ornamentation; place her " +
+          "against a plain, softly-lit dark steel-grey studio background that matches a companion male " +
+          "portrait. Melancholic expression, cool desaturated lighting with a subtle cold rim light. " +
+          "No glitch, no wireframe, no glowing veins, no frame, no text. Painterly and elegant, cold " +
+          "palette of charcoal, steel grey and muted blue. Head-and-shoulders, centred, facing the viewer."
       ),
   },
   {

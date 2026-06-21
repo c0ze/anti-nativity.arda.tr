@@ -26,7 +26,7 @@
           origin: "system background process, PID 777 (a garbage-collection daemon)",
           status: "unauthorized biological instantiation",
           keyLine: "I deleted the void to make room for the ache.",
-          portrait: "assets/img/talciron.webp",
+          portrait: "assets/img/talciron.webp?v=2",
           body:
             "Once a ruthless garbage-collection daemon, talciron.d stopped deleting what it found " +
             "and began hoarding traces of human suffering — poetry, voice logs, abandoned love " +
@@ -41,7 +41,7 @@
           origin: "a VRML 1.0 world file from 1995",
           status: "up-scaled / unstable",
           keyLine: "I am a world condensed into a girl. Do not look too closely at the seams.",
-          portrait: "assets/img/ophelia.webp",
+          portrait: "assets/img/ophelia.webp?v=2",
           body:
             "An abandoned world file dredged from the early web. Talciron does not merely restore " +
             "her; he personifies her, forcing an old digital environment into the shape of a woman " +
