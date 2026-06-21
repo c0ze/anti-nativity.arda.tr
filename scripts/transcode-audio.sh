@@ -24,8 +24,8 @@ EOF
 map | while IFS='=' read -r base slug; do
   src="songs/${base}.wav"
   [ -f "$src" ] || { echo "  MISSING  $src"; continue; }
-  ffmpeg -y -loglevel error -i "$src" -c:a flac -compression_level 8 "audio/${slug}.flac"
-  ffmpeg -y -loglevel error -i "$src" -c:a libmp3lame -q:a 2 "audio/${slug}.mp3"
+  ffmpeg -nostdin -y -loglevel error -i "$src" -c:a flac -compression_level 8 "audio/${slug}.flac"
+  ffmpeg -nostdin -y -loglevel error -i "$src" -c:a libmp3lame -q:a 2 "audio/${slug}.mp3"
   dur=$(ffprobe -v error -show_entries format=duration -of csv=p=0 "$src")
   printf '  ok  %-34s dur=%.2f\n' "$slug" "$dur"
 done
