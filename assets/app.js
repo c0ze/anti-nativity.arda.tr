@@ -77,6 +77,7 @@
   var VOL_OFF = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M16.5 9.5l5 5M21.5 9.5l-5 5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
   var NEXT = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" fill="currentColor"/></svg>';
   var LOOP = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h10v3l4-4-4-4v3H5v6h2V7zm10 10H7v-3l-4 4 4 4v-3h12v-6h-2v4z" fill="currentColor"/></svg>';
+  var FILM = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1zm5.6 4.1v7.8l6.4-3.9-6.4-3.9z" fill="currentColor"/></svg>';
 
   function buildStage() {
     var el = document.getElementById("stage");
@@ -88,6 +89,7 @@
         '<button class="track" type="button" data-i="' + i + '" aria-current="' + (i === 0) + '">' +
           '<span class="track__num">' + esc(s.num) + '</span>' +
           '<span><span class="track__rom">' + esc(s.title) + '</span></span>' +
+          (s.youtubeId ? '<span class="track__video" title="Has a music video">' + FILM + '</span>' : '') +
           '<span class="track__dur" data-dur="' + i + '">' + fmt(s.duration) + '</span></button>' : "";
       }).join("");
       return rows ? '<p class="track-group">' + esc(a[1]) + '</p>' + rows : "";
@@ -100,7 +102,8 @@
       '<div class="reveal"><div class="np">' +
         '<div class="np__title" data-np="title"></div>' +
         '<div class="np__sub"   data-np="sub"></div>' +
-        '<div class="np__concept" data-np="concept"></div></div>' +
+        '<div class="np__concept" data-np="concept"></div>' +
+        '<button class="np__video" type="button" data-np="video">' + FILM + 'watch the video</button></div>' +
       '<div class="lyrics" data-view="all"><div class="lyrics__scroller"></div></div>' +
       '<p class="lyrics-hint"></p>' +
       '<div class="controls">' +
@@ -127,6 +130,7 @@
     var curT      = el.querySelector(".time--cur");
     var durT      = el.querySelector(".time--dur");
     var hint      = el.querySelector(".lyrics-hint");
+    var npVideo   = el.querySelector('[data-np="video"]');
 
     var state = { i: -1, lines: [], times: null, active: -1 };
     var allowPlay = false;   // play-gate: only let audio play when we actually intend to
@@ -170,6 +174,11 @@
       el.querySelector('[data-np="title"]').textContent   = song.title;
       el.querySelector('[data-np="sub"]').textContent     = song.subtitle || "";
       el.querySelector('[data-np="concept"]').textContent = song.concept  || "";
+      if (npVideo) {
+        npVideo.classList.toggle("is-shown", !!song.youtubeId);
+        if (song.youtubeId) npVideo.setAttribute("data-id", song.youtubeId);
+        else npVideo.removeAttribute("data-id");
+      }
       allowPlay = false;
       audio.pause();
       audio.src = pickAudio(song);
@@ -279,6 +288,44 @@
       } catch (e) {}
     }
 
+    /* --- music-video lightbox ----------------------------------------- */
+    var vmodal = document.getElementById("vmodal");
+    var vvideo = document.getElementById("vmodal-video");
+    var vcap   = document.getElementById("vmodal-cap");
+    function songByVideo(id) {
+      for (var k = 0; k < SONGS.length; k++) { if (SONGS[k].youtubeId === id) return SONGS[k]; }
+      return null;
+    }
+    function openVideo(id) {
+      if (!id || !vmodal) return;
+      audio.pause();   // never leave music playing under the video
+      var song = songByVideo(id) || {};
+      if (vcap) vcap.textContent = (song.num ? song.num + " \xb7 " : "") + (song.title || "");
+      vvideo.innerHTML = '<iframe src="https://www.youtube-nocookie.com/embed/' + encodeURIComponent(id) +
+        '?autoplay=1&rel=0&modestbranding=1" title="' + esc(song.title || "Music video") + '" ' +
+        'allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" ' +
+        'allowfullscreen></iframe>';
+      vmodal.hidden = false;
+      document.body.classList.add("vmodal-open");
+      var x = vmodal.querySelector(".vmodal__close"); if (x) x.focus();
+    }
+    function closeVideo() {
+      if (!vmodal || vmodal.hidden) return;
+      vmodal.hidden = true;
+      vvideo.innerHTML = "";   // unloading the iframe stops playback
+      document.body.classList.remove("vmodal-open");
+    }
+    if (vmodal) {
+      Array.prototype.forEach.call(vmodal.querySelectorAll("[data-vclose]"), function (b) {
+        b.addEventListener("click", closeVideo);
+      });
+      document.addEventListener("keydown", function (e) {
+        if (e.key === "Escape" && !vmodal.hidden) closeVideo();
+      });
+    }
+    if (npVideo) npVideo.addEventListener("click", function () { openVideo(npVideo.getAttribute("data-id")); });
+    window.anVideo = openVideo;
+
     selectTrack(0);
     window.anPlay = function (i) { selectTrack(i); document.getElementById("stage").scrollIntoView(); startPlay(); };
   }
@@ -310,13 +357,19 @@
         node.innerHTML =
           '<div class="song__head"><h3 class="song__rom">' + esc(song.num) + ' \xb7 ' + esc(song.title) + '</h3>' +
           '<span class="song__en">' + esc(song.subtitle || "") + '</span>' +
-          '<button class="song__listen" type="button" data-play="' + i + '">' + LISTEN + 'listen</button></div>' +
+          '<span class="song__actions">' +
+            (song.youtubeId ? '<button class="song__video" type="button" data-video="' + esc(song.youtubeId) + '">' + FILM + 'watch video</button>' : '') +
+            '<button class="song__listen" type="button" data-play="' + i + '">' + LISTEN + 'listen</button>' +
+          '</span></div>' +
           '<p class="song__concept">' + esc(song.concept) + '</p>' + sections;
         el.appendChild(node);
       });
     });
     el.querySelectorAll("[data-play]").forEach(function (b) {
       b.addEventListener("click", function () { window.anPlay(+b.getAttribute("data-play")); });
+    });
+    el.querySelectorAll("[data-video]").forEach(function (b) {
+      b.addEventListener("click", function () { if (window.anVideo) window.anVideo(b.getAttribute("data-video")); });
     });
   }
 

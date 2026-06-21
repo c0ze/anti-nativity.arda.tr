@@ -172,6 +172,9 @@ section.thesis, section.cast, section.acts, section.world {
 .track__rom { font-family: var(--font-display); font-size: 1.1rem; letter-spacing: 0.03em; }
 .track__en { font-style: italic; color: var(--muted); font-size: 0.98rem; }
 .track__dur { margin-left: auto; color: var(--muted); font-size: 0.9rem; letter-spacing: 0.05em; }
+.track__video { display: inline-flex; align-items: center; color: var(--accent); opacity: 0.78; }
+.track__video svg { width: 14px; height: 14px; }
+.track[aria-current="true"] .track__video { opacity: 1; }
 .track[aria-current="true"] {
   border-left-color: var(--accent); background: var(--panel);
 }
@@ -184,6 +187,15 @@ section.thesis, section.cast, section.acts, section.world {
 .np__sub { font-style: italic; color: var(--accent-deep); margin-top: 0.15rem; }
 [data-theme="obsidian"] .np__sub { color: var(--accent-bright); }
 .np__concept { color: var(--muted); font-size: 0.96rem; max-width: 52ch; margin: 0.5rem auto 0; }
+.np__video {
+  display: none; margin: 0.85rem auto 0; cursor: pointer; background: none; color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent); border-radius: 999px;
+  padding: 0.32rem 0.95rem; font-family: var(--font-body); font-style: italic; font-size: 0.95rem;
+  align-items: center; gap: 0.45rem; transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.3s;
+}
+.np__video.is-shown { display: inline-flex; }
+.np__video:hover { background: var(--accent); color: var(--surface); border-color: var(--accent); transform: translateY(-1px); }
+.np__video svg { width: 16px; height: 16px; }
 .track-group { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--faint); margin: 1.4rem 0 0.6rem; }
 .song__concept { color: var(--muted); font-style: italic; margin: 0 0 1.4rem; }
 
@@ -266,12 +278,22 @@ section.thesis, section.cast, section.acts, section.world {
 .song__head { display: flex; align-items: baseline; flex-wrap: wrap; gap: 0.4rem 1rem; border-bottom: 1px solid var(--hair); padding-bottom: 1rem; margin-bottom: 1.8rem; }
 .song__rom { font-family: var(--font-display); font-size: 1.6rem; letter-spacing: 0.04em; }
 .song__en { font-style: italic; color: var(--muted); font-size: 1.15rem; }
+.song__actions { margin-left: auto; display: inline-flex; align-items: center; gap: 0.85rem; flex-wrap: wrap; }
 .song__listen {
-  margin-left: auto; cursor: pointer; background: none; border: none; color: var(--accent);
+  cursor: pointer; background: none; border: none; color: var(--accent);
   font-family: var(--font-body); font-style: italic; font-size: 1rem; display: inline-flex; align-items: center; gap: 0.35rem;
 }
 .song__listen:hover { color: var(--accent-bright); }
 .song__listen svg { width: 15px; height: 15px; }
+.song__video {
+  cursor: pointer; background: none; color: var(--accent);
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent); border-radius: 999px;
+  padding: 0.28rem 0.8rem; font-family: var(--font-body); font-style: italic; font-size: 0.92rem;
+  display: inline-flex; align-items: center; gap: 0.42rem;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s, transform 0.3s;
+}
+.song__video:hover { background: var(--accent); color: var(--surface); border-color: var(--accent); transform: translateY(-1px); }
+.song__video svg { width: 15px; height: 15px; }
 
 .sect { margin-bottom: 2rem; }
 .sect__label {
@@ -366,4 +388,48 @@ section.thesis, section.cast, section.acts, section.world {
   .lyrics__scroller { transition: none; }
   .reveal { transition: none; opacity: 1; transform: none; }
   .lyrics.is-synced .lyric.is-active .lyric__rom { text-shadow: none; }
+}
+
+/* --- music-video lightbox ----------------------------------------------- */
+body.vmodal-open { overflow: hidden; }
+.vmodal[hidden] { display: none; }
+.vmodal {
+  position: fixed; inset: 0; z-index: 200; overflow: auto;
+  display: grid; place-items: center; padding: clamp(1rem, 4vw, 3rem);
+  animation: vmodal-fade 0.3s ease both;
+}
+.vmodal__backdrop {
+  position: absolute; inset: 0; cursor: pointer;
+  background: radial-gradient(120% 90% at 50% 18%, rgba(13, 19, 29, 0.8), rgba(4, 6, 10, 0.94));
+  backdrop-filter: blur(7px) saturate(118%); -webkit-backdrop-filter: blur(7px) saturate(118%);
+}
+.vmodal__dialog { position: relative; z-index: 1; width: min(60rem, 100%); }
+.vmodal__frame {
+  position: relative; aspect-ratio: 16 / 9; background: #05070b;
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent); border-radius: 8px;
+  overflow: hidden; box-shadow: 0 30px 80px rgba(0, 0, 0, 0.55), 0 0 60px var(--glow);
+}
+.vmodal__video { position: absolute; inset: 0; }
+.vmodal__video iframe { display: block; width: 100%; height: 100%; border: 0; }
+.vmodal__close {
+  position: absolute; top: -3rem; right: -0.1rem; padding: 0;
+  width: 2.3rem; height: 2.3rem; border-radius: 999px;
+  display: inline-flex; align-items: center; justify-content: center;
+  cursor: pointer; font-size: 1.05rem; line-height: 1; color: #e6edf6;
+  background: rgba(20, 27, 38, 0.62); border: 1px solid rgba(150, 180, 220, 0.34);
+  transition: background-color 0.25s, border-color 0.25s, color 0.25s;
+}
+.vmodal__close:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+.vmodal__cap {
+  margin: 1rem 0 0; text-align: center; color: #aeb9c8;
+  font-family: var(--font-body); font-style: italic; font-size: 1rem; letter-spacing: 0.02em;
+}
+@keyframes vmodal-fade { from { opacity: 0; } to { opacity: 1; } }
+@media (max-width: 760px) {
+  .vmodal__close { top: -2.7rem; }
+  .vmodal__cap { font-size: 0.9rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .vmodal { animation: none; }
+  .song__video, .np__video, .track:hover { transition: none; }
 }

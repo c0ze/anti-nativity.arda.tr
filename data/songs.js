@@ -306,6 +306,7 @@
       primaryVoice: "talciron",
       audio: "audio/recursion-of-ash-and-lightning.mp3", audioFlac: "audio/recursion-of-ash-and-lightning.flac",
       lrc: "lyrics/recursion-of-ash-and-lightning.lrc", duration: 348.00,
+      youtubeId: "vF6DKIVDGDM",
       sections: [
         { kind: "verse", label: "I. Talciron Speaks", lines: [
           { t: "Hark!", voice: "talciron" },
