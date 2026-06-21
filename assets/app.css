@@ -140,7 +140,7 @@ em { font-style: italic; }
 
 /* --- section scaffolding ------------------------------------------------ */
 section.stage, section.archive, section.colophon,
-section.thesis, section.personae, section.acts, section.world {
+section.thesis, section.cast, section.acts, section.world {
   max-width: var(--maxw); margin: 0 auto; padding: 6rem 1.6rem;
 }
 .section-head { margin-bottom: 3rem; }
@@ -347,7 +347,7 @@ section.thesis, section.personae, section.acts, section.world {
   .themeswitch button { padding: 0.4rem; }
   body { font-size: 18px; }
   section.stage, section.archive, section.colophon,
-  section.thesis, section.personae, section.acts, section.world { padding: 4rem 1.3rem; }
+  section.thesis, section.cast, section.acts, section.world { padding: 4rem 1.3rem; }
   .personae, .personae--minor, .glossary { grid-template-columns: 1fr; }
 }
 
