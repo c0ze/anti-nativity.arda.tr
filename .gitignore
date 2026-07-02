@@ -1,4 +1,6 @@
 .env
+.env.*
 .DS_Store
 node_modules/
 songs/*.wav
+.claude/settings.local.json

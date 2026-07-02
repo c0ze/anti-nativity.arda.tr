@@ -43,6 +43,9 @@ jobs:
             --exclude='docs/' \
             --exclude='scripts/' \
             --exclude='songs/' \
+            --exclude='Portrait_*.jpg' \
+            --exclude='package.json' \
+            --exclude='package-lock.json' \
             --exclude='README.md' \
             --exclude='.gitignore' \
             --exclude='.DS_Store' \

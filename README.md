@@ -15,32 +15,34 @@ python3 -m http.server 8788 --directory .
 # open http://localhost:8788
 ```
 
-(Serving over http lets the timed `.lrc` files load when they are added; the page
-also works from `file://`, falling back to static lyrics.)
+(Serving over http lets the timed `.lrc` files load; the page also works from
+`file://`, falling back to static lyrics.)
 
 ## Structure
 
 ```
-index.html            shell (hero, thesis, stage, cast, acts, world)
+index.html            shell (hero, thesis, stage, cast, acts, world, video modal)
 assets/app.css        Glass + Obsidian themes + all components
 assets/app.js         player, FLAC pick, voice-tagged lyrics, themes, lore renderers
 assets/img/           Gemini-generated imagery (hero, portraits, cover, og, texture, favicon)
 data/songs.js         tracks: concept + voice-tagged lyrics  ← edit here
 data/lore.js          thesis, characters, glossary, the Recursion Error, credits
-lyrics/               timed .lrc files (added later; player is static until then)
+lyrics/               timed .lrc per track (all nine synced) + .txt sync sheets (see lyrics/README.md)
 audio/                web FLAC + MP3 (transcoded from songs/)
 songs/                WAV masters (git-ignored)
 scripts/              one-time asset generators
+docs/superpowers/     the design spec + plan
 ```
 
 ## Regenerating assets
 
-The two scripts only need to run when the source material changes; the site
-itself needs neither.
+The scripts only need to run when the source material changes; the site itself
+needs none of them.
 
 ```bash
-bash scripts/transcode-audio.sh   # WAV masters -> audio/*.{flac,mp3}  (needs ffmpeg)
-node scripts/gen-assets.mjs       # portraits + backdrop -> assets/img/ (needs GEMINI_API_KEY in .env)
+bash scripts/transcode-audio.sh     # WAV masters -> audio/*.{flac,mp3}  (needs ffmpeg)
+node scripts/gen-assets.mjs         # portraits + backdrop -> assets/img/ (needs GEMINI_API_KEY in .env)
+node scripts/build-lyrics-txt.mjs   # data/songs.js -> lyrics/*.txt sync sheets (see lyrics/README.md)
 ```
 
 `scripts/gen-assets.mjs` reads `GEMINI_API_KEY` from `.env` (git-ignored, never
@@ -50,16 +52,21 @@ committed) and uses Gemini 2.5 Flash Image; pass `--force` to regenerate.
 
 Lyrics live in `data/songs.js`, one `{ t, voice }` per line. Each line is tinted
 and tagged by voice — `talciron` · `ophelia` · `choir` · `soprano` · `masses` ·
-`scribe` · `beast` · `homunculus` · `both` · `stage`. Add a timed `lyrics/<slug>.lrc`
-(one timestamp per line, in song order) and the stage lights line-by-line; until
-then it shows the full lyrics statically.
+`scribe` · `beast` · `homunculus` · `both` · `stage`. Every track has a timed
+`lyrics/<slug>.lrc` (one timestamp per line, in song order), so the stage lights
+line-by-line as the song plays; without one it would show the full lyrics
+statically. See `lyrics/README.md` for the sync workflow.
 
 ## Deploy
 
-Static GitHub Pages: push the repo, keep `CNAME` + `.nojekyll`, and the
-`.github/workflows/deploy-pages.yml` workflow publishes it. Point a DNS `CNAME`
-record for `anti-nativity.arda.tr` at GitHub Pages. Everything except
-`songs/*.wav`, `.env`, and `node_modules/` ships.
+Pushes to `main` deploy automatically: `.github/workflows/deploy-pages.yml`
+publishes the site to GitHub Pages at
+[anti-nativity.arda.tr](https://anti-nativity.arda.tr) (`CNAME` and `.nojekyll`
+live in the repo root). The workflow ships the static site only — `docs/`,
+`scripts/`, the source portraits (`Portrait_*.jpg`), and the npm files
+(`package.json`, `package-lock.json`) are excluded from the artifact, and
+`songs/*.wav`, `.env`, and `node_modules/` are git-ignored, so none of it ever
+ships.
 
 > Note: `audio/` is ~414 MB of lossless FLAC + MP3. It is within GitHub's limits
 > (largest file 50 MB; Pages soft cap ~1 GB) but makes for a heavy push/clone.
