@@ -261,11 +261,12 @@ section.thesis, section.cast, section.acts, section.world {
   place-items: center; padding: 0; transition: color 0.3s; }
 .vol__btn:hover { color: var(--accent); }
 .vol__btn svg { width: 20px; height: 20px; }
-.btn-next, .btn-loop { flex: none; background: none; border: none; color: var(--muted); cursor: pointer;
+.btn-next, .btn-loop, .btn-share { flex: none; background: none; border: none; color: var(--muted); cursor: pointer;
   display: grid; place-items: center; padding: 0; transition: color 0.3s; }
-.btn-next:hover, .btn-loop:hover { color: var(--accent); }
-.btn-next svg, .btn-loop svg { width: 22px; height: 22px; }
+.btn-next:hover, .btn-loop:hover, .btn-share:hover { color: var(--accent); }
+.btn-next svg, .btn-loop svg, .btn-share svg { width: 22px; height: 22px; }
 .btn-loop[aria-pressed="true"] { color: var(--accent); }
+.btn-share.is-copied { color: var(--accent); }
 .scrub::-webkit-slider-thumb, .vol__slider::-webkit-slider-thumb { -webkit-appearance: none; width: 13px; height: 13px; border-radius: 50%;
   background: var(--accent-bright); box-shadow: 0 0 10px var(--glow); cursor: pointer; }
 .scrub::-moz-range-thumb, .vol__slider::-moz-range-thumb { width: 13px; height: 13px; border: none; border-radius: 50%;

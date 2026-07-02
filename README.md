@@ -23,7 +23,7 @@ python3 -m http.server 8788 --directory .
 ```
 index.html            shell (hero, thesis, stage, cast, acts, world, video modal)
 assets/app.css        Glass + Obsidian themes + all components
-assets/app.js         player, FLAC pick, voice-tagged lyrics, themes, lore renderers
+assets/app.js         player, FLAC pick, voice-tagged lyrics, Media Session, share links, themes, lore renderers
 assets/img/           Gemini-generated imagery (hero, portraits, cover, og, texture, favicon)
 data/songs.js         tracks: concept + voice-tagged lyrics  ← edit here
 data/lore.js          thesis, characters, glossary, the Recursion Error, credits
